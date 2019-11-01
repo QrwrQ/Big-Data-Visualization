@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>Home</title>
+    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport'/>
+    <link rel="icon" href="../static/assets/img/icon.ico" type="image/x-icon"/>
+    <script src="../static/assets/js/echarts.min.js"></script>
+    <script src="../static/assets/js/chalk.js"></script>
+    <!-- Fonts and icons -->
+    <script src="../static/assets/js/plugin/webfont/webfont.min.js"></script>
+    <script>
+        WebFont.load({
+            google: {"families": ["Lato:300,400,700,900"]},
+            custom: {
+                "families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"],
+                urls: ['assets/css/fonts.min.css']
+            },
+            active: function () {
+                sessionStorage.fonts = true;
+            }
+        });
+    </script>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../static/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/assets/css/atlantis.min.css">
+
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link rel="stylesheet" href="../static/assets/css/demo.css">
+</head>
+<body data-background-color="dark">
+
+<div class="wrapper">
+    <div class="main-header">
+        <!-- Logo Header -->
+        <div class="logo-header" data-background-color="dark2">
+
+            <a href="index.html" class="logo">
+                <img src="../static/assets/img/logo.svg" alt="navbar brand" class="navbar-brand">
+            </a>
+            <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
+                    data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon">
+						<i class="icon-menu"></i>
+					</span>
+            </button>
+            <button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
+            <div class="nav-toggle">
+                <button class="btn btn-toggle toggle-sidebar">
+                    <i class="icon-menu"></i>
+                </button>
+            </div>
+        </div>
+        <!-- End Logo Header -->
+
+        <!-- Navbar Header -->
+        <nav class="navbar navbar-header navbar-expand-lg" data-background-color="dark">
+            <div class="container-fluid">
+
+                <form class="navbar-left navbar-form nav-search mr-md-3" method="post">
+                    <div class="input-group">
+                        <input type="text" placeholder="Search ..." class="form-control" name="input1">
+                        <input type="text" placeholder="Search ..." class="form-control" name="input2">
+                        <input type="submit" name="提交">
+                    </div>
+                </form>
+
+            </div>
+            <!--<div class="container-fluid">
+                   <div class="collapse" id="search-nav">
+                       <form class="navbar-left navbar-form nav-search mr-md-3" method="post">
+                           <div class="input-group">
+                               <div class="input-group-prepend">
+                               </div>
+                               <input type="text" placeholder="Search ..." class="form-control" name="input2">
+                           </div>
+                       </form>
+                   </div>
+           </div> -->
+        </nav>
+        <!-- End Navbar -->
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar sidebar-style-2" data-background-color="dark2">
+        <div class="sidebar-wrapper scrollbar scrollbar-inner">
+            <div class="sidebar-content">
+                <ul class="nav nav-primary">
+                    <li class="nav-section">
+							<span class="sidebar-mini-icon">
+								<i class="fa fa-ellipsis-h"></i>
+							</span>
+                    </li>
+                    <li class="nav-item">
+                        <a data-toggle="collapse" href="#base">
+                            <i class="fas fa-layer-group"></i>
+                            <p>人员分布</p>
+                            <span class="caret"></span>
+                        </a>
+                        <div class="collapse" id="base">
+                            <ul class="nav nav-collapse">
+                                <li>
+                                    <a>
+                                        <span class="sub-item">路线人员密度</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="sub-item">站点人员密度</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a data-toggle="collapse" href="#sidebarLayouts">
+                            <i class="fas fa-th-list"></i>
+                            <p>运营情况</p>
+                            <span class="caret"></span>
+                        </a>
+                        <div class="collapse" id="sidebarLayouts">
+                            <ul class="nav nav-collapse">
+                                <li>
+                                    <a onclick="table1()">
+                                        <span class="sub-item">运营正点情况</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a onclick="table2()">
+                                        <span class="sub-item">运营到站情况</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <!--<li class="mx-4 mt-2">-->
+                    <!--<a href="#" class="btn btn-primary btn-block"><span class="btn-label mr-2"> <i class="fa fa-heart"></i> </span>Buy Pro</a>-->
+                    <!--</li>-->
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- End Sidebar -->
+
+    <div class="main-panel">
+        <div class="content">
+            <div class="page-inner">
+                <div class="mt-2 mb-4">
+
+                    <h2 id="text1" class="text-white pb-2">Welcome back, Hizrian!</h2>
+                    <h5 class="text-white op-7 mb-4">Yesterday I was clever, so I wanted to change the world. Today I am
+                        wise, so I am changing myself.</h5>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card card-dark bg-primary-gradient">
+                            <div class="card-body pb-0">
+                                <div class="h1 fw-bold float-right">+5%</div>
+                                <h2 class="mb-2">17</h2>
+                                <p>Users online</p>
+                                <div class="pull-in sparkline-fix chart-as-background">
+                                    <div id="lineChart">
+                                        <canvas width="327" height="70"
+                                                style="display: inline-block; width: 327px; height: 70px; vertical-align: top;"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-head-row">
+                                    <div class="card-title">User Statistics</div>
+                                    <div class="card-tools">
+                                        <a href="#" class="btn btn-info btn-border btn-round btn-sm mr-2">
+												<span class="btn-label">
+													<i class="fa fa-pencil"></i>
+												</span>
+                                            Export
+                                        </a>
+                                        <a href="#" class="btn btn-info btn-border btn-round btn-sm">
+												<span class="btn-label">
+													<i class="fa fa-print"></i>
+												</span>
+                                            Print
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div id="chart-table" class="chart-container" style="min-height: 375px">
+                                    <div id="table" style="height: 400px;min-width: 600px">
+                                        <script type="text/javascript">
+                                            function pagetype() {
+                                                alter(111);
+
+                                            }
+
+                                            function table1() {
+                                                err = eval('{{ err|safe }}');
+                                                if (err != "") {
+                                                    alert(err);
+                                                }
+                                                if (err == "") {
+                                                    bustime_f = eval('{{ bustime_f|safe }}');
+                                                    bustime_p = eval('{{ bustime_p|safe }}');
+                                                    bus_turn = eval('{{ turn|safe }}');
+
+
+                                                    // 基于准备好的dom，初始化echarts实例
+                                                    var myChart = echarts.init(document.getElementById('table'), 'chalk');
+                                                    var option = {
+                                                        backgroundColor: '#323a5e',
+                                                        tooltip: {
+                                                            trigger: 'axis',
+                                                            axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                                                                type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                                                            }
+                                                        },
+                                                        grid: {
+                                                            left: '2%',
+                                                            right: '4%',
+                                                            bottom: '14%',
+                                                            top: '16%',
+                                                            containLabel: true
+                                                        },
+                                                        legend: {
+                                                            data: ['1', '2'],
+                                                            right: 10,
+                                                            top: 12,
+                                                            textStyle: {
+                                                                color: "#fff"
+                                                            },
+                                                            itemWidth: 12,
+                                                            itemHeight: 10,
+                                                            // itemGap: 35
+                                                        },
+                                                        xAxis: {
+                                                            type: 'category',
+                                                            data: bus_turn,
+                                                            //data: ['2012', '2013', '2014', '2015'],
+                                                            axisLine: {
+                                                                lineStyle: {
+                                                                    color: 'white'
+
+                                                                }
+                                                            },
+                                                            axisLabel: {
+                                                                // interval: 0,
+                                                                // rotate: 40,
+                                                                textStyle: {
+                                                                    fontFamily: 'Microsoft YaHei'
+                                                                }
+                                                            },
+                                                        },
+
+                                                        yAxis: {
+                                                            type: 'time',
+                                                            axisLine: {
+                                                                show: false,
+                                                                lineStyle: {
+                                                                    color: 'white'
+                                                                }
+                                                            },
+                                                            splitLine: {
+                                                                show: true,
+                                                                lineStyle: {
+                                                                    color: 'rgba(255,255,255,0.3)'
+                                                                }
+                                                            },
+                                                            axisLabel: {}
+                                                        },
+                                                        "dataZoom": [{
+                                                            "show": true,
+                                                            "height": 12,
+                                                            "xAxisIndex": [
+                                                                0
+                                                            ],
+                                                            bottom: '8%',
+                                                            "start": 10,
+                                                            "end": 90,
+                                                            //   handleIcon: 'path://M306.1,413c0,2.2-1.8,4-4,4h-59.8c-2.2,0-4-1.8-4-4V200.8c0-2.2,1.8-4,4-4h59.8c2.2,0,4,1.8,4,4V413z',
+                                                            //   handleSize: '110%',
+                                                            //   handleStyle:{
+                                                            //     color:"#d3dee5",
+
+                                                            //   },
+                                                            textStyle: {
+                                                                color: "#fff"
+                                                            },
+                                                            borderColor: "#90979c"
+                                                        }, {
+                                                            "type": "inside",
+                                                            "show": true,
+                                                            "height": 15,
+                                                            "start": 1,
+                                                            "end": 35
+                                                        }],
+                                                        series: [{
+                                                            name: '实际',
+                                                            type: 'bar',
+                                                            barWidth: '15%',
+                                                            itemStyle: {
+                                                                normal: {
+                                                                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                                                        offset: 0,
+                                                                        color: '#fccb05'
+                                                                    }, {
+                                                                        offset: 1,
+                                                                        color: '#f5804d'
+                                                                    }]),
+                                                                    barBorderRadius: 12,
+                                                                },
+                                                            },
+                                                            data: bustime_f
+                                                            //data: ['2018/12/1 01:00:00', '2018/12/1 02:00:00', '2018/12/1 03:00:00', '2018/12/1 04:00:00']
+                                                        },
+                                                            {
+                                                                name: '计划',
+                                                                type: 'bar',
+                                                                barWidth: '15%',
+                                                                itemStyle: {
+                                                                    normal: {
+                                                                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                                                            offset: 0,
+                                                                            color: '#8bd46e'
+                                                                        }, {
+                                                                            offset: 1,
+                                                                            color: '#09bcb7'
+                                                                        }]),
+                                                                        barBorderRadius: 11,
+                                                                    }
+
+                                                                },
+                                                                data: bustime_p
+                                                                //data: ['2018/12/1 01:30', '2018/12/1 02:30', '2018/12/1 03:30', '2018/12/1 04:30']
+                                                            }]
+                                                    };
+
+                                                    setInterval(function () {
+                                                        // var dataLen = option.series[0].data.length;
+
+                                                        // 取消之前高亮的图形
+                                                        // myChart.dispatchAction({
+                                                        //   type: 'downplay',
+                                                        //   seriesIndex: 0,
+                                                        //   dataIndex: app.currentIndex
+                                                        // });
+                                                        // app.currentIndex = (app.currentIndex + 1) % dataLen;
+                                                        //console.log(app.currentIndex);
+                                                        // 高亮当前图形
+                                                        // myChart.dispatchAction({
+                                                        //   type: 'highlight',
+                                                        //   seriesIndex: 0,
+                                                        //   dataIndex: app.currentIndex,
+                                                        // });
+                                                        // 显示 tooltip
+                                                        myChart.dispatchAction({
+                                                            type: 'showTip',
+                                                            seriesIndex: 0,
+                                                        });
+                                                    }, 1000);
+
+                                                    myChart.setOption(option);
+                                                }
+                                            }
+
+                                            function table2() {
+                                                var myChart = echarts.init(document.getElementById('content-body2'));
+                                                var fontColor = '#30eee9';
+                                                {#time_a = eval('{{ time_a|safe }}');#}
+                                                {#sta_a = eval('{{ sta_a|safe }}');#}
+                                                alert("11");
+                                                option = {
+                                                    title: {
+                                                        text: '分所销售水量占比',
+                                                        top: '5%',
+                                                        left: 'center',
+                                                        textStyle: {
+                                                            color: '#FFF',
+                                                            align: 'center',
+                                                        }
+                                                    },
+                                                    backgroundColor: '#11183c',
+                                                    grid: {
+                                                        left: '9%',
+                                                        right: '10%',
+                                                        top: '20%',
+                                                        bottom: '15%',
+                                                        containLabel: true
+                                                    },
+                                                    tooltip: {
+                                                        show: true,
+                                                        trigger: 'item'
+                                                    },
+                                                    legend: {
+                                                        show: true,
+                                                        x: 'center',
+                                                        top: '12%',
+                                                        y: '35',
+                                                        icon: 'stack',
+                                                        itemWidth: 10,
+                                                        itemHeight: 10,
+                                                        textStyle: {
+                                                            color: '#1bb4f6'
+                                                        },
+                                                        data: ['大户', '市中', '历下', '天桥', '槐荫', '历城']
+                                                    },
+                                                    xAxis: [
+                                                        {
+                                                            type: 'category',
+                                                            boundaryGap: false,
+                                                            axisLabel: {
+                                                                color: fontColor
+                                                            },
+                                                            axisLine: {
+                                                                show: true,
+                                                                lineStyle: {
+                                                                    color: '#397cbc'
+                                                                }
+                                                            },
+                                                            axisTick: {
+                                                                show: false,
+                                                            },
+                                                            splitLine: {
+                                                                show: false,
+                                                                lineStyle: {
+                                                                    color: '#195384'
+                                                                }
+                                                            },
+                                                            data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+                                                        }
+                                                    ],
+                                                    yAxis: [
+                                                        {
+                                                            type: 'value',
+                                                            name: '立方米',
+                                                            min: 0,
+                                                            max: 1000,
+                                                            axisLabel: {
+                                                                formatter: '{value}',
+                                                                textStyle: {
+                                                                    color: '#2ad1d2'
+                                                                }
+                                                            },
+                                                            axisLine: {
+                                                                lineStyle: {
+                                                                    color: '#27b4c2'
+                                                                }
+                                                            },
+                                                            axisTick: {
+                                                                show: false,
+                                                            },
+                                                            splitLine: {
+                                                                show: true,
+                                                                lineStyle: {
+                                                                    color: '#11366e'
+                                                                }
+                                                            }
+                                                        },
+                                                        {
+                                                            type: 'value',
+                                                            name: '占比',
+                                                            min: 0,
+                                                            max: 1000,
+                                                            axisLabel: {
+                                                                formatter: '{value} %',
+                                                                textStyle: {
+                                                                    color: '#186afe'
+                                                                }
+                                                            },
+                                                            axisLine: {
+                                                                lineStyle: {
+                                                                    color: '#186afe'
+                                                                }
+                                                            },
+                                                            axisTick: {
+                                                                show: false,
+                                                            },
+                                                            splitLine: {
+                                                                show: true,
+                                                                lineStyle: {
+                                                                    color: '#11366e'
+                                                                }
+                                                            }
+                                                        }
+                                                    ],
+                                                    series: [
+                                                        {
+                                                            name: '大户',
+                                                            type: 'line',
+                                                            stack: '总量',
+                                                            symbol: 'circle',
+                                                            symbolSize: 8,
+                                                            itemStyle: {
+                                                                normal: {
+                                                                    color: '#0092f6',
+                                                                    lineStyle: {
+                                                                        color: "#0092f6",
+                                                                        width: 1
+                                                                    },
+                                                                    areaStyle: {
+                                                                        //color: '#94C9EC'
+                                                                        color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [{
+                                                                            offset: 0,
+                                                                            color: 'rgba(7,44,90,0.3)'
+                                                                        }, {
+                                                                            offset: 1,
+                                                                            color: 'rgba(0,146,246,0.9)'
+                                                                        }]),
+                                                                    }
+                                                                }
+                                                            },
+                                                            markPoint: {
+                                                                itemStyle: {
+                                                                    normal: {
+                                                                        color: 'red'
+                                                                    }
+                                                                }
+                                                            },
+                                                            data: [120, 132, 101, 134, 90, 230, 210, 182, 191, 234, 260, 280]
+                                                        },
+                                                        {
+                                                            name: '市中',
+                                                            type: 'line',
+                                                            stack: '总量',
+                                                            symbol: 'circle',
+                                                            symbolSize: 8,
+
+                                                            itemStyle: {
+                                                                normal: {
+                                                                    color: '#00d4c7',
+                                                                    lineStyle: {
+                                                                        color: "#00d4c7",
+                                                                        width: 1
+                                                                    },
+                                                                    areaStyle: {
+                                                                        //color: '#94C9EC'
+                                                                        color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [{
+                                                                            offset: 0,
+                                                                            color: 'rgba(7,44,90,0.3)'
+                                                                        }, {
+                                                                            offset: 1,
+                                                                            color: 'rgba(0,212,199,0.9)'
+                                                                        }]),
+                                                                    }
+                                                                }
+                                                            },
+                                                            data: [220, 182, 191, 210, 230, 270, 270, 201, 154, 140, 240, 250]
+                                                        },
+                                                        {
+                                                            name: '历下',
+                                                            type: 'line',
+                                                            stack: '总量',
+                                                            symbol: 'circle',
+                                                            symbolSize: 8,
+                                                            itemStyle: {
+                                                                normal: {
+                                                                    color: '#aecb56',
+                                                                    lineStyle: {
+                                                                        color: "#aecb56",
+                                                                        width: 1
+                                                                    },
+                                                                    areaStyle: {
+                                                                        //color: '#94C9EC'
+                                                                        color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [{
+                                                                            offset: 0,
+                                                                            color: 'rgba(7,44,90,0.3)'
+                                                                        }, {
+                                                                            offset: 1,
+                                                                            color: 'rgba(114,144,89,0.9)'
+                                                                        }]),
+                                                                    }
+                                                                }
+                                                            },
+                                                            data: [150, 232, 201, 154, 190, 180, 210, 150, 182, 201, 154, 190]
+                                                        },
+                                                        {
+                                                            name: '天桥',
+                                                            type: 'line',
+                                                            stack: '总量',
+                                                            symbol: 'circle',
+                                                            symbolSize: 8,
+                                                            itemStyle: {
+                                                                normal: {
+                                                                    color: '#3A44FB',
+                                                                    lineStyle: {
+                                                                        color: "#3A44FB",
+                                                                        width: 1
+                                                                    },
+                                                                    areaStyle: {
+                                                                        //color: '#94C9EC'
+                                                                        color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [{
+                                                                            offset: 0,
+                                                                            color: 'rgba(7,46,101,0.3)'
+                                                                        }, {
+                                                                            offset: 1,
+                                                                            color: 'rgba(0,166,246,0.9)'
+                                                                        }]),
+                                                                    }
+                                                                }
+                                                            },
+                                                            data: [150, 232, 201, 154, 190, 180, 210, 150, 182, 201, 154, 190]
+                                                        },
+                                                        {
+                                                            name: '槐荫',
+                                                            type: 'line',
+                                                            stack: '总量',
+                                                            symbol: 'circle',
+                                                            symbolSize: 8,
+                                                            itemStyle: {
+                                                                normal: {
+                                                                    color: '#6FE81A',
+                                                                    lineStyle: {
+                                                                        color: "#6FE81A",
+                                                                        width: 1
+                                                                    },
+                                                                    areaStyle: {
+                                                                        //color: '#94C9EC'
+                                                                        color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [{
+                                                                            offset: 0,
+                                                                            color: 'rgba(7,44,90,0.3)'
+                                                                        }, {
+                                                                            offset: 1,
+                                                                            color: 'rgba(0,212,199,0.9)'
+                                                                        }]),
+                                                                    }
+                                                                }
+                                                            },
+                                                            data: [150, 232, 201, 154, 190, 180, 210, 150, 182, 201, 154, 190]
+                                                        },
+                                                        {
+                                                            name: '历城',
+                                                            type: 'line',
+                                                            stack: '总量',
+                                                            symbol: 'circle',
+                                                            symbolSize: 8,
+                                                            itemStyle: {
+                                                                normal: {
+                                                                    color: '#aecb56',
+                                                                    lineStyle: {
+                                                                        color: "#aecb56",
+                                                                        width: 1
+                                                                    },
+                                                                    areaStyle: {
+                                                                        //color: '#94C9EC'
+                                                                        color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [{
+                                                                            offset: 0,
+                                                                            color: 'rgba(7,44,90,0.3)'
+                                                                        }, {
+                                                                            offset: 1,
+                                                                            color: 'rgba(0,212,199,0.9)'
+                                                                        }]),
+                                                                    }
+                                                                }
+                                                            },
+                                                            data: [200, 232, 201, 200, 190, 190, 210, 190, 182, 201, 154, 190]
+                                                        }
+                                                    ]
+                                                };
+                                                myChart.setOption(option);
+
+                                            }
+                                        </script>
+                                    </div>
+                                    <!--<canvas id="st	atisticsChart"></canvas>-->
+                                </div>
+                                <div id="myChartLegend"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card card-primary bg-primary-grdient">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="container-fluid">
+            <nav class="pull-left">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            ThemeKita
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            Help
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            Licenses
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+</div>
+
+<!-- Custom template | don't include it in your project! -->
+<div class="custom-template">
+    <div class="title">Settings</div>
+    <div class="custom-content">
+        <div class="switcher">
+            <div class="switch-block">
+                <h4>Logo Header</h4>
+                <div class="btnSwitch">
+                    <button type="button" class="changeLogoHeaderColor" data-color="dark"></button>
+                    <button type="button" class="changeLogoHeaderColor" data-color="blue"></button>
+                    <button type="button" class="changeLogoHeaderColor" data-color="purple"></button>
+                    <button type="button" class="changeLogoHeaderColor" data-color="light-blue"></button>
+                    <button type="button" class="changeLogoHeaderColor" data-color="green"></button>
+                    <button type="button" class="changeLogoHeaderColor" data-color="orange"></button>
+                    <button type="button" class="changeLogoHeaderColor" data-color="red"></button>
+                    <button type="button" class="changeLogoHeaderColor" data-color="white"></button>
+                    <br/>
+                    <button type="button" class="selected changeLogoHeaderColor" data-color="dark2"></button>
+                    <button type="button" class="changeLogoHeaderColor" data-color="blue2"></button>
+                    <button type="button" class="changeLogoHeaderColor" data-color="purple2"></button>
+                    <button type="button" class="changeLogoHeaderColor" data-color="light-blue2"></button>
+                    <button type="button" class="changeLogoHeaderColor" data-color="green2"></button>
+                    <button type="button" class="changeLogoHeaderColor" data-color="orange2"></button>
+                    <button type="button" class="changeLogoHeaderColor" data-color="red2"></button>
+                </div>
+            </div>
+            <div class="switch-block">
+                <h4>Navbar Header</h4>
+                <div class="btnSwitch">
+                    <button type="button" class="selected changeTopBarColor" data-color="dark"></button>
+                    <button type="button" class="changeTopBarColor" data-color="blue"></button>
+                    <button type="button" class="changeTopBarColor" data-color="purple"></button>
+                    <button type="button" class="changeTopBarColor" data-color="light-blue"></button>
+                    <button type="button" class="changeTopBarColor" data-color="green"></button>
+                    <button type="button" class="changeTopBarColor" data-color="orange"></button>
+                    <button type="button" class="changeTopBarColor" data-color="red"></button>
+                    <button type="button" class="changeTopBarColor" data-color="white"></button>
+                    <br/>
+                    <button type="button" class="changeTopBarColor" data-color="dark2"></button>
+                    <button type="button" class="changeTopBarColor" data-color="blue2"></button>
+                    <button type="button" class="changeTopBarColor" data-color="purple2"></button>
+                    <button type="button" class="changeTopBarColor" data-color="light-blue2"></button>
+                    <button type="button" class="changeTopBarColor" data-color="green2"></button>
+                    <button type="button" class="changeTopBarColor" data-color="orange2"></button>
+                    <button type="button" class="changeTopBarColor" data-color="red2"></button>
+                </div>
+            </div>
+            <div class="switch-block">
+                <h4>Sidebar</h4>
+                <div class="btnSwitch">
+                    <button type="button" class="changeSideBarColor" data-color="white"></button>
+                    <button type="button" class="changeSideBarColor" data-color="dark"></button>
+                    <button type="button" class="selected changeSideBarColor" data-color="dark2"></button>
+                </div>
+            </div>
+            <div class="switch-block">
+                <h4>Background</h4>
+                <div class="btnSwitch">
+                    <button type="button" class="changeBackgroundColor" data-color="bg2"></button>
+                    <button type="button" class="changeBackgroundColor selected" data-color="bg1"></button>
+                    <button type="button" class="changeBackgroundColor" data-color="bg3"></button>
+                    <button type="button" class="selected changeBackgroundColor" data-color="dark"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="custom-toggle">
+        <i class="flaticon-settings"></i>
+    </div>
+</div>
+<!-- End Custom template -->
+</div>
+<!--   Core JS Files   -->
+<script src="../static/assets/js/core/jquery.3.2.1.min.js"></script>
+<script src="../static/assets/js/core/popper.min.js"></script>
+<script src="../static/assets/js/core/bootstrap.min.js"></script>
+
+<!-- jQuery UI -->
+<script src="../static/assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+<script src="../static/assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+
+<!-- jQuery Scrollbar -->
+<script src="../static/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+
+
+<!-- Chart JS -->
+<script src="../static/assets/js/plugin/chart.js/chart.min.js"></script>
+
+<!-- jQuery Sparkline -->
+<script src="../static/assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
+
+<!-- Chart Circle -->
+<script src="../static/assets/js/plugin/chart-circle/circles.min.js"></script>
+
+<!-- Datatables -->
+<script src="../static/assets/js/plugin/datatables/datatables.min.js"></script>
+
+<!-- Bootstrap Notify -->
+<script src="../static/assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+
+<!-- jQuery Vector Maps -->
+<script src="../static/assets/js/plugin/jqvmap/jquery.vmap.min.js"></script>
+<script src="../static/assets/js/plugin/jqvmap/maps/jquery.vmap.world.js"></script>
+
+<!-- Sweet Alert -->
+<script src="../static/assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+
+<!-- Atlantis JS -->
+<script src="../static/assets/js/atlantis.min.js"></script>
+
+<!-- Atlantis DEMO methods, don't include it in your project! -->
+<script src="../static/assets/js/setting-demo.js"></script>
+<script src="../static/assets/js/demo.js"></script>
+<script>
+    $('#lineChart').sparkline([102, 109, 120, 99, 110, 105, 115], {
+        type: 'line',
+        height: '70',
+        width: '100%',
+        lineWidth: '2',
+        lineColor: 'rgba(255, 255, 255, .5)',
+        fillColor: 'rgba(255, 255, 255, .15)'
+    });
+
+    $('#lineChart2').sparkline([99, 125, 122, 105, 110, 124, 115], {
+        type: 'line',
+        height: '70',
+        width: '100%',
+        lineWidth: '2',
+        lineColor: 'rgba(255, 255, 255, .5)',
+        fillColor: 'rgba(255, 255, 255, .15)'
+    });
+
+    $('#lineChart3').sparkline([105, 103, 123, 100, 95, 105, 115], {
+        type: 'line',
+        height: '70',
+        width: '100%',
+        lineWidth: '2',
+        lineColor: 'rgba(255, 255, 255, .5)',
+        fillColor: 'rgba(255, 255, 255, .15)'
+    });
+</script>
+</body>
+</html>
