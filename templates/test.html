@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+
+<head>
+<meta charset="UTF-8" http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>title</title>
+
+    <SCRIPT>
+
+        var intTimeStep = 20;
+
+        var isIe = (window.ActiveXObject) ? true : false;
+
+        var intAlphaStep = (isIe) ? 5 : 0.05;
+
+        var curSObj = null;
+
+        var curOpacity = null;
+
+        var stopTime = 0;
+
+        function startObjMessage(objId) {
+
+            curSObj = document.getElementById(objId);
+
+            if (isIe) {
+                curSObj.style.cssText = 'DISPLAY: none; Z-INDEX: 1; FILTER: alpha(opacity=0); POSITION: absolute;';
+            }
+
+            setMessage();
+
+        }
+
+        function setMessage() {
+
+            if (isIe) {
+                curSObj.filters.alpha.opacity = 0;
+            } else {
+                curOpacity = 0;
+                curSObj.style.opacity = 0
+            }
+
+            curSObj.style.display = '';
+
+            setMessageShow();
+
+        }
+
+        function setMessageShow() {
+
+            if (isIe) {
+
+                curSObj.filters.alpha.opacity += intAlphaStep;
+
+                if (curSObj.filters.alpha.opacity < 100) {
+                    setTimeout('setMessageShow()', intTimeStep);
+                } else {
+                    stopTime += 10;
+                    if (stopTime < 500) {
+                        setTimeout('setMessageShow()', intTimeStep);
+                    } else {
+                        stopTime = 0;
+                        setMessageClose();
+                    }
+                }
+
+            } else {
+
+                curOpacity += intAlphaStep;
+
+                curSObj.style.opacity = curOpacity;
+
+                if (curOpacity < 1) {
+                    setTimeout('setMessageShow()', intTimeStep);
+                } else {
+                    stopTime += 10;
+                    if (stopTime < 200) {
+                        setTimeout('setMessageShow()', intTimeStep);
+                    } else {
+                        stopTime = 0;
+                        setMessageClose();
+                    }
+                }
+
+            }
+
+        }
+
+        function setMessageClose() {
+
+            if (isIe) {
+
+                curSObj.filters.alpha.opacity -= intAlphaStep;
+
+                if (curSObj.filters.alpha.opacity > 0) {
+
+                    setTimeout('setMessageClose()', intTimeStep);
+
+                } else {
+
+                    curSObj.style.display = 'none';
+
+                }
+
+            } else {
+
+                curOpacity -= intAlphaStep;
+
+                if (curOpacity > 0) {
+
+                    curSObj.style.opacity = curOpacity;
+
+                    setTimeout('setMessageClose()', intTimeStep);
+
+                } else {
+
+                    curSObj.style.display = 'none';
+
+                }
+
+            }
+
+        }
+
+    </SCRIPT>
+
+    <script type="text/javascript">
+
+        window.setInterval(function () {
+
+            startObjMessage('objDiv')
+
+        }, 3000)
+
+    </script>
+
+</head>
+
+<body>
+
+<span>这里显示结果！静等3秒！</span>
+
+<DIV id="objDiv" style="DISPLAY: none; Z-INDEX: 1; POSITION: absolute; ">
+
+    气不气！打我呀！略略略........
+
+</DIV>
+
+</body>
+
+</html>

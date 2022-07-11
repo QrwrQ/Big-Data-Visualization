@@ -1,0 +1,13 @@
+docopt
+requests>=2.7.0
+six>=1.9.0
+
+[avro]
+fastavro>=0.21.19
+
+[dataframe]
+fastavro>=0.21.19
+pandas>=0.14.1
+
+[kerberos]
+requests-kerberos>=0.7.0

@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>Home</title>
+    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport'/>
+    <link rel="icon" href="../static/assets/img/icon.ico" type="image/x-icon"/>
+    <script src="../static/assets/js/echarts.min.js"></script>
+    <script src="../static/assets/js/bmap.js"></script>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=0UqXGL98FSmi22w2Rl6HK56I"></script>
+    <script src="../static/assets/js/chalk.js"></script>
+    <!-- Fonts and icons -->
+    <script src="../static/assets/js/plugin/webfont/webfont.min.js"></script>
+    <script>
+        WebFont.load({
+            google: {"families": ["Lato:300,400,700,900"]},
+            custom: {
+                "families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"],
+                urls: ['assets/css/fonts.min.css']
+            },
+            active: function () {
+                sessionStorage.fonts = true;
+            }
+        });
+    </script>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../static/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/assets/css/atlantis.min.css">
+
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link rel="stylesheet" href="../static/assets/css/demo.css">
+</head>
+<body data-background-color="dark">
+
+<div class="wrapper">
+    <div class="main-header">
+        <!-- Logo Header -->
+        <div class="logo-header" data-background-color="dark2">
+
+
+            <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
+                    data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon">
+						<i class="icon-menu"></i>
+					</span>
+            </button>
+            <button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
+            <div class="nav-toggle">
+                <button class="btn btn-toggle toggle-sidebar">
+                    <i class="icon-menu"></i>
+                </button>
+            </div>
+        </div>
+        <!-- End Logo Header -->
+
+        <!-- Navbar Header -->
+        <nav class="navbar navbar-header navbar-expand-lg" data-background-color="dark">
+            <div class="container-fluid">
+
+                <form class="navbar-left navbar-form nav-search mr-md-3" method="post">
+                    <div class="input-group">
+                        <input type="text" placeholder="Search ..." class="form-control" name="input1">
+                        <input type="text" placeholder="Search ..." class="form-control" name="input2">
+                        <input type="submit" name="提交">
+                    </div>
+                </form>
+
+            </div>
+            <!--<div class="container-fluid">
+                   <div class="collapse" id="search-nav">
+                       <form class="navbar-left navbar-form nav-search mr-md-3" method="post">
+                           <div class="input-group">
+                               <div class="input-group-prepend">
+                               </div>
+                               <input type="text" placeholder="Search ..." class="form-control" name="input2">
+                           </div>
+                       </form>
+                   </div>
+           </div> -->
+        </nav>
+        <!-- End Navbar -->
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar sidebar-style-2" data-background-color="dark2">
+        <div class="sidebar-wrapper scrollbar scrollbar-inner">
+            <div class="sidebar-content">
+                <ul class="nav nav-primary">
+                    <li class="nav-section">
+							<span class="sidebar-mini-icon">
+								<i class="fa fa-ellipsis-h"></i>
+							</span>
+                    </li>
+                    <li class="nav-item">
+                        <a data-toggle="collapse" href="#base">
+                            <i class="fas fa-layer-group"></i>
+                            <p>客流分布</p>
+                            <span class="caret"></span>
+                        </a>
+                        <div class="collapse" id="base">
+                            <ul class="nav nav-collapse">
+                                <li>
+                                    <a href="{{ url_for('page_one') }}">
+                                        <span class="sub-item">路线客流</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="sub-item">站点客流</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="sub-item">客流OD</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a data-toggle="collapse" href="#sidebarLayouts">
+                            <i class="fas fa-th-list"></i>
+                            <p>行车计划</p>
+                            <span class="caret"></span>
+                        </a>
+                        <div class="collapse" id="sidebarLayouts">
+                            <ul class="nav nav-collapse">
+                                <li>
+                                    <a onclick="table1()">
+                                        <span class="sub-item">行车正点</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a onclick="table3()">
+                                        <span class="sub-item">到站时间</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <!--<li class="mx-4 mt-2">-->
+                    <!--<a href="#" class="btn btn-primary btn-block"><span class="btn-label mr-2"> <i class="fa fa-heart"></i> </span>Buy Pro</a>-->
+                    <!--</li>-->
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- End Sidebar -->
+
+    <div class="main-panel">
+        <div class="content">
+            <div class="page-inner">
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card card-dark bg-primary-gradient">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header">
+                            </div>
+                            <div class="card-body">
+                                <div id="chart-table" class="chart-container" style="min-height: 375px">
+                                    <div id="table" style="height: 400px;min-width: 500px">
+                                        <script type="text/javascript">
+                                            var myChart = echarts.init(document.getElementById('table'));
+                                            var uploadedDataURL = "../static/data/data-1479372708751-SJpo1lsbl.txt";
+
+                                            function convertData(sourceData) {
+                                                return [].concat.apply([], $.map(sourceData, function (stop, index) {
+                                                    return {
+                                                        name: stop.stopName,
+                                                        value: [stop.jingdu, stop.weidu, stop.ss/3,stop.sl/2]
+                                                    };
+                                                }));
+                                            }
+
+                                            var option = {
+                                                bmap: {
+                                                    roam: true,
+                                                    mapStyle: {
+                                                        'styleJson': [{
+                                                            'featureType': 'water',
+                                                            'elementType': 'all',
+                                                            'stylers': {
+                                                                'color': '#031628'
+                                                            }
+                                                        }, {
+                                                            'featureType': 'land',
+                                                            'elementType': 'geometry',
+                                                            'stylers': {
+                                                               'color': '#000102'
+                                                            }
+                                                        }, {
+                                                            'featureType': 'highway',
+                                                            'elementType': 'all',
+                                                            'stylers': {
+                                                                'visibility': 'off'
+                                                            }
+                                                        }, {
+                                                            'featureType': 'arterial',
+                                                            'elementType': 'geometry.fill',
+                                                            'stylers': {
+                                                                'color': '#000000'
+                                                            }
+                                                        }, {
+                                                            'featureType': 'arterial',
+                                                            'elementType': 'geometry.stroke',
+                                                            'stylers': {
+                                                                'color': '#0b3d51'
+                                                            }
+                                                        }, {
+                                                            'featureType': 'local',
+                                                            'elementType': 'geometry',
+                                                            'stylers': {
+                                                                'color': '#000000'
+                                                            }
+                                                        }, {
+                                                            'featureType': 'railway',
+                                                            'elementType': 'geometry.fill',
+                                                            'stylers': {
+                                                                'color': '#000000'
+                                                            }
+                                                        }, {
+                                                            'featureType': 'railway',
+                                                            'elementType': 'geometry.stroke',
+                                                            'stylers': {
+                                                                'color': '#08304b'
+                                                            }
+                                                        }, {
+                                                            'featureType': 'subway',
+                                                            'elementType': 'geometry',
+                                                            'stylers': {
+                                                                'lightness': -70
+                                                            }
+                                                        }, {
+                                                            'featureType': 'building',
+                                                            'elementType': 'geometry.fill',
+                                                            'stylers': {
+                                                                'color': '#000000'
+                                                            }
+                                                        }, {
+                                                            'featureType': 'all',
+                                                            'elementType': 'labels.text.fill',
+                                                            'stylers': {
+                                                                'color': '#857f7f'
+                                                            }
+                                                        }, {
+                                                            'featureType': 'all',
+                                                            'elementType': 'labels.text.stroke',
+                                                            'stylers': {
+                                                                'color': '#000000'
+                                                            }
+                                                        }, {
+                                                            'featureType': 'building',
+                                                            'elementType': 'geometry',
+                                                            'stylers': {
+                                                                'color': '#022338'
+                                                            }
+                                                        }, {
+                                                            'featureType': 'green',
+                                                            'elementType': 'geometry',
+                                                            'stylers': {
+                                                                'color': '#062032'
+                                                            }
+                                                        }, {
+                                                            'featureType': 'boundary',
+                                                            'elementType': 'all',
+                                                            'stylers': {
+                                                                'color': '#465b6c'
+                                                            }
+                                                        }, {
+                                                            'featureType': 'manmade',
+                                                            'elementType': 'all',
+                                                            'stylers': {
+                                                                'color': '#022338'
+                                                            }
+                                                        }, {
+                                                            'featureType': 'label',
+                                                            'elementType': 'all',
+                                                            'stylers': {
+                                                                'visibility': 'off'
+                                                            }
+                                                        }]
+                                                    }
+                                                },
+                                                tooltip: {
+                                                    trigger: 'item'
+                                                },
+                                                legend: {
+
+                                                    orient: 'vertical',
+                                                    y: 'bottom',
+                                                    x: 'right',
+                                                    data: ['13路站点', '16路站点'],
+                                                    textStyle: {
+                                                        color: '#fff'
+                                                    }
+                                                },
+                                                /*visualMap: [{
+                                                    left: 'right',
+                                                    top: '10%',
+                                                    dimension: 2,
+                                                    min: 0,
+                                                    max: 100,
+                                                    itemWidth: 30,
+                                                    itemHeight: 120,
+                                                    calculable: true,
+                                                    precision: 0.1,
+                                                    inRange: {
+                                                        symbolSize: [3, 10]
+                                                    },
+                                                    outOfRange: {
+                                                        symbolSize: [3, 10],
+                                                        color: ['rgba(255,255,255,.2)']
+                                                    }
+                                                }],*/
+                                                series: [{
+                                                    name: '13路站点',
+                                                    type: 'scatter',
+                                                    coordinateSystem: 'bmap',
+                                                    symbolSize: function (val) {
+                                                        return val[2] / 10;
+                                                    },
+                                                    label: {
+                                                        normal: {
+                                                            formatter: '{b}',
+                                                            position: 'right',
+                                                            show: false
+                                                        },
+                                                        emphasis: {
+                                                            show: true
+                                                        }
+                                                    },
+                                                    itemStyle: {
+                                                        normal: {
+                                                            color: '#a6c84c'
+                                                        }
+                                                    }
+                                                }, {
+                                                    name: '13路站点',
+                                                    type: 'effectScatter',
+                                                    coordinateSystem: 'bmap',
+                                                    symbolSize: function (val) {
+                                                        return val[2] / 5;
+                                                    },
+                                                    showEffectOn: 'render',
+                                                    rippleEffect: {
+                                                        brushType: 'stroke'
+                                                    },
+                                                    hoverAnimation: true,
+                                                    label: {
+                                                        normal: {
+                                                            formatter: '{b}',
+                                                            position: 'right',
+                                                            show: true
+                                                        }
+                                                    },
+                                                    itemStyle: {
+                                                        normal: {
+                                                            color: '#9FC33D',
+                                                            shadowBlur: 20,
+                                                            shadowColor: '#333'
+                                                        }
+                                                    },
+                                                    zlevel: 1
+                                                }, {
+                                                    name: '16路站点',
+                                                    type: 'scatter',
+                                                    coordinateSystem: 'bmap',
+                                                    symbolSize: function (val) {
+                                                        return val[3] / 10;
+                                                    },
+                                                    label: {
+                                                        normal: {
+                                                            formatter: '{b}',
+                                                            position: 'right',
+                                                            show: false
+                                                        },
+                                                        emphasis: {
+                                                            show: true
+                                                        }
+                                                    },
+                                                    itemStyle: {
+                                                        normal: {
+                                                            color: '#ffa022'
+                                                        }
+                                                    }
+                                                }, {
+                                                    name: '16路站点',
+                                                    type: 'effectScatter',
+                                                    coordinateSystem: 'bmap',
+                                                    symbolSize: function (val) {
+                                                        return val[3] / 5;
+                                                    },
+                                                    showEffectOn: 'render',
+                                                    rippleEffect: {
+                                                        brushType: 'stroke'
+                                                    },
+                                                    hoverAnimation: true,
+                                                    label: {
+                                                        normal: {
+                                                            formatter: '{b}',
+                                                            position: 'right',
+                                                            show: true
+                                                        }
+                                                    },
+                                                    itemStyle: {
+                                                        normal: {
+                                                            color: '#FF960D',
+                                                            shadowBlur: 10,
+                                                            shadowColor: '#333'
+                                                        }
+                                                    },
+                                                    zlevel: 1
+                                                }]
+                                            };
+
+                                            $.getJSON(uploadedDataURL, function (rawData) {
+                                                var data = convertData(rawData);
+                                                option.series[0].data = data;
+                                                option.series[1].data = data.sort(function (a, b) {
+                                                    return b.value[2] - a.value[2];
+                                                }).slice(0, 0);
+                                                option.series[2].data = data;
+                                                option.series[3].data = data.sort(function (a, b) {
+                                                    return b.value[3] - a.value[3];
+                                                }).slice(0, 0);
+                                                myChart.setOption(option);
+                                                // console.log(option);
+                                                //获取echart中使用的bmap实例
+                                                var map = myChart.getModel().getComponent('bmap').getBMap();
+                                                map.disableDoubleClickZoom();
+                                                map.centerAndZoom("南京", 13);
+
+                                            });
+
+                                            myChart.setOption(option);
+
+                                        </script>
+                                    </div>
+                                    <!--<canvas id="st	atisticsChart"></canvas>-->
+                                </div>
+                                <div id="myChartLegend"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card card-primary bg-primary-grdient">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="container-fluid">
+            <nav class="pull-left">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            ThemeKita
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            Help
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            Licenses
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+</div>
+
+<!-- Custom template | don't include it in your project! -->
+<div class="custom-template">
+    <div class="title">Settings</div>
+    <div class="custom-content">
+        <div class="switcher">
+            <div class="switch-block">
+                <h4>Logo Header</h4>
+                <div class="btnSwitch">
+                    <button type="button" class="changeLogoHeaderColor" data-color="dark"></button>
+                    <button type="button" class="changeLogoHeaderColor" data-color="blue"></button>
+                    <button type="button" class="changeLogoHeaderColor" data-color="purple"></button>
+                    <button type="button" class="changeLogoHeaderColor" data-color="light-blue"></button>
+                    <button type="button" class="changeLogoHeaderColor" data-color="green"></button>
+                    <button type="button" class="changeLogoHeaderColor" data-color="orange"></button>
+                    <button type="button" class="changeLogoHeaderColor" data-color="red"></button>
+                    <button type="button" class="changeLogoHeaderColor" data-color="white"></button>
+                    <br/>
+                    <button type="button" class="selected changeLogoHeaderColor" data-color="dark2"></button>
+                    <button type="button" class="changeLogoHeaderColor" data-color="blue2"></button>
+                    <button type="button" class="changeLogoHeaderColor" data-color="purple2"></button>
+                    <button type="button" class="changeLogoHeaderColor" data-color="light-blue2"></button>
+                    <button type="button" class="changeLogoHeaderColor" data-color="green2"></button>
+                    <button type="button" class="changeLogoHeaderColor" data-color="orange2"></button>
+                    <button type="button" class="changeLogoHeaderColor" data-color="red2"></button>
+                </div>
+            </div>
+            <div class="switch-block">
+                <h4>Navbar Header</h4>
+                <div class="btnSwitch">
+                    <button type="button" class="selected changeTopBarColor" data-color="dark"></button>
+                    <button type="button" class="changeTopBarColor" data-color="blue"></button>
+                    <button type="button" class="changeTopBarColor" data-color="purple"></button>
+                    <button type="button" class="changeTopBarColor" data-color="light-blue"></button>
+                    <button type="button" class="changeTopBarColor" data-color="green"></button>
+                    <button type="button" class="changeTopBarColor" data-color="orange"></button>
+                    <button type="button" class="changeTopBarColor" data-color="red"></button>
+                    <button type="button" class="changeTopBarColor" data-color="white"></button>
+                    <br/>
+                    <button type="button" class="changeTopBarColor" data-color="dark2"></button>
+                    <button type="button" class="changeTopBarColor" data-color="blue2"></button>
+                    <button type="button" class="changeTopBarColor" data-color="purple2"></button>
+                    <button type="button" class="changeTopBarColor" data-color="light-blue2"></button>
+                    <button type="button" class="changeTopBarColor" data-color="green2"></button>
+                    <button type="button" class="changeTopBarColor" data-color="orange2"></button>
+                    <button type="button" class="changeTopBarColor" data-color="red2"></button>
+                </div>
+            </div>
+            <div class="switch-block">
+                <h4>Sidebar</h4>
+                <div class="btnSwitch">
+                    <button type="button" class="changeSideBarColor" data-color="white"></button>
+                    <button type="button" class="changeSideBarColor" data-color="dark"></button>
+                    <button type="button" class="selected changeSideBarColor" data-color="dark2"></button>
+                </div>
+            </div>
+            <div class="switch-block">
+                <h4>Background</h4>
+                <div class="btnSwitch">
+                    <button type="button" class="changeBackgroundColor" data-color="bg2"></button>
+                    <button type="button" class="changeBackgroundColor selected" data-color="bg1"></button>
+                    <button type="button" class="changeBackgroundColor" data-color="bg3"></button>
+                    <button type="button" class="selected changeBackgroundColor" data-color="dark"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="custom-toggle">
+        <i class="flaticon-settings"></i>
+    </div>
+</div>
+<!-- End Custom template -->
+</div>
+<!--   Core JS Files   -->
+<script src="../static/assets/js/core/jquery.3.2.1.min.js"></script>
+<script src="../static/assets/js/core/popper.min.js"></script>
+<script src="../static/assets/js/core/bootstrap.min.js"></script>
+
+<!-- jQuery UI -->
+<script src="../static/assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+<script src="../static/assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+
+<!-- jQuery Scrollbar -->
+<script src="../static/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+
+
+<!-- Chart JS -->
+<script src="../static/assets/js/plugin/chart.js/chart.min.js"></script>
+
+<!-- jQuery Sparkline -->
+<script src="../static/assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
+
+<!-- Chart Circle -->
+<script src="../static/assets/js/plugin/chart-circle/circles.min.js"></script>
+
+<!-- Datatables -->
+<script src="../static/assets/js/plugin/datatables/datatables.min.js"></script>
+
+<!-- Bootstrap Notify -->
+<script src="../static/assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+
+<!-- jQuery Vector Maps -->
+<script src="../static/assets/js/plugin/jqvmap/jquery.vmap.min.js"></script>
+<script src="../static/assets/js/plugin/jqvmap/maps/jquery.vmap.world.js"></script>
+
+<!-- Sweet Alert -->
+<script src="../static/assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+
+<!-- Atlantis JS -->
+<script src="../static/assets/js/atlantis.min.js"></script>
+
+<!-- Atlantis DEMO methods, don't include it in your project! -->
+<script src="../static/assets/js/setting-demo.js"></script>
+<script src="../static/assets/js/demo.js"></script>
+<script>
+    $('#lineChart').sparkline([102, 109, 120, 99, 110, 105, 115], {
+        type: 'line',
+        height: '70',
+        width: '100%',
+        lineWidth: '2',
+        lineColor: 'rgba(255, 255, 255, .5)',
+        fillColor: 'rgba(255, 255, 255, .15)'
+    });
+
+    $('#lineChart2').sparkline([99, 125, 122, 105, 110, 124, 115], {
+        type: 'line',
+        height: '70',
+        width: '100%',
+        lineWidth: '2',
+        lineColor: 'rgba(255, 255, 255, .5)',
+        fillColor: 'rgba(255, 255, 255, .15)'
+    });
+
+    $('#lineChart3').sparkline([105, 103, 123, 100, 95, 105, 115], {
+        type: 'line',
+        height: '70',
+        width: '100%',
+        lineWidth: '2',
+        lineColor: 'rgba(255, 255, 255, .5)',
+        fillColor: 'rgba(255, 255, 255, .15)'
+    });
+</script>
+</body>
+</html>

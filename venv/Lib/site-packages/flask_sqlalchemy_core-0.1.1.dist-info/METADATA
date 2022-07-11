@@ -1,0 +1,213 @@
+Metadata-Version: 2.1
+Name: flask-sqlalchemy-core
+Version: 0.1.1
+Summary: SQLAlchemy Core integration for Flask
+Home-page: https://github.com/rshk/flask-sqlalchemy-core
+Author: Samuele Santi
+Author-email: samuele@samuelesanti.com
+License: BSD License
+Platform: UNKNOWN
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3 :: Only
+Requires-Dist: werkzeug
+Requires-Dist: sqlalchemy
+
+Flask / SQLAlchemy Core
+#######################
+
+SQLAlchemy Core integration for Flask application.
+
+Provides an easy way for setting up and using SQLAlchemy Core in Flask
+(or Werkzeug-based, really) applications.
+
+The main benefit of using this package over plain SQLAlchemy is the
+ability of sharing the current connection in a context-local "global"
+object.
+
+This allows creating nested transactions without having to explicitly
+pass the connection object across functions.
+
+This in turn enables running test functions inside a transaction,
+which will be rolled back on test teardown, greatly reducing test run
+time, by removing the need of continuously dropping and re-creating
+the whole database schema for each test function run.
+
+
+Usage
+=====
+
+Set up
+------
+
+.. code-block:: python
+
+    import os
+    from flask_sqlalchemy_core import FlaskSQLAlchemy
+
+    DATABASE_URL = os.environ['DATABASE_URL']
+
+    db = FlaskSQLAlchemy(DATABASE_URL)
+
+
+Running queries
+---------------
+
+.. code-block:: python
+
+    from sqlalchemy import select
+
+    # Create your query here
+    query = select(...)
+
+    with db.connect() as conn:
+        result = conn.execute(query)
+        # Do something with the result...
+
+
+Transactions
+------------
+
+.. code-block:: python
+
+    with db.transaction() as conn:
+        result = conn.execute(query)
+
+
+The transaction will automatically committed upon a successful exit
+from the "with" block, or rolled back if an exception was raised.
+
+
+Nested transactions
+-------------------
+
+Simply nest ``with db.transaction():`` blocks.
+
+This allows for more reusable code, for example:
+
+.. code-block:: python
+
+    def create_user(...):
+        with db.transaction() as conn:
+            # Create record in the users table
+            conn.execute(...)
+            # Other data for the user in some other table
+            conn.execute(...)
+
+    def create_client(...):
+        with db.transaction() as conn:
+            # Create record in the clients table
+            conn.execute(...)
+            # ...other data for this client...
+            conn.execute(...)
+
+    def setup_new_client(client_name, user_name):
+        with db.transaction():
+            create_user(user_name)
+            create_client(client_name)
+
+
+Define tables
+-------------
+
+Just do as you normally would (create a Metadata instance, use it to
+define your schema).
+
+
+Creating schema
+---------------
+
+.. code-block:: python
+
+    metadata.create_all(db.get_engine())
+
+
+Test fixtures
+-------------
+
+For use with pytest, place those in a ``conftest.py`` file in your
+tests directory.
+
+**Note:** you might want to change your ``DATABASE_URL`` environment
+variable during testing, to avoid overriding your current development
+database.
+
+.. code-block:: python
+
+    import pytest
+
+    @pytest.fixture
+    def db(db_schema):
+        with db.transaction(autocommit=False, rollback=True):
+            # By wrapping execution in a transaction that automatically
+            # gets rolled back, we can avoid having to recreate the whole
+            # schema for every test function run.
+            yield
+
+    @pytest.fixture(scope='session')
+    def db_schema():
+        engine = db.get_engine()
+
+        # Clean up, in case tables were left around from a previous run.
+        # This can happen if the test process was abruptly killed.
+        metadata.drop_all(engine)
+
+        metadata.create_all(engine)
+
+        yield
+
+        metadata.drop_all(engine)
+
+
+Database migrations
+-------------------
+
+Use Alembic_ for creating database migrations.
+
+
+.. _Alembic: https://alembic.zzzcomputing.com/en/latest/
+
+
+Database support
+================
+
+The library is currently tested with PostgreSQL (10).
+
+Everything should work with other backends too (except nested
+transactions, on backends that don't support checkpoints).
+
+
+Testing
+=======
+
+Before running the test suite, you'll need to start a SQL database and
+set the DATABASE_URL environment variable.
+
+For convenience, you can use the ``bin/run-test-database`` script,
+which will automatically run a PostgreSQL instance via Docker.
+
+The script will print a suitable value for ``DATABASE_URL`` as well.
+
+Oncer you're done, simply kill it via Ctrl-C.
+
+
+To install test dependencies::
+
+    pip install -r test_requirements.txt
+
+To run the test suite::
+
+    pytest -vvv ./tests
+
+
+To run tests using SQLite backend::
+
+    DATABASE_URL="sqlite:///:memory:" pytest -vvv ./tests
+
+**Warning:** some tests will be skipped, as SQLite doesn't support
+nested transactions.
+
+
+
+
